@@ -3,6 +3,7 @@ import {IdleUpWidgetState, PressedWidgetState } from "../core/ui";
 import {Window, Widget, RoleType, EventArgs} from "../core/ui";
 // importing code from SVG.js library
 import {Rect, Text, Box} from "../core/ui";
+import { SVG } from '@svgdotjs/svg.js';  // If you're using svg.js module
 
 class Button extends Widget{
     private _rect: Rect;
@@ -32,6 +33,7 @@ class Button extends Widget{
         // prevent text selection
         this.selectable = false;
     }
+    
 
     set fontSize(size:number){
         this._fontSize= size;
@@ -47,11 +49,16 @@ class Button extends Widget{
             this._text.y(this._text_y);
         }
     }
-    
+
     render(): void {
+        const cornerRadius = 25;
+        
         this._group = (this.parent as Window).window.group();
+        // Create a path for the rounded rectangle
         this._rect = this._group.rect(this.width, this.height);
-        this._rect.stroke("black");
+            // Create a path for the rounded rectangle
+        this._rect.stroke("pink");
+        this._rect.fill("#FFB8BF");
         this._text = this._group.text(this._input);
         // Set the outer svg element 
         this.outerSvg = this._group;
@@ -63,6 +70,23 @@ class Button extends Widget{
         // for this widget, we want to know when the group or rect objects
         // receive events
         this.registerEvent(eventrect);
+    }
+    set text(newText: string) {
+        this._input = newText;
+        this._text.text(newText);
+    }
+    
+    get text(): string {
+        return this._input;
+    }
+    set size(newSize: { width: number, height: number }) {
+        this.width = newSize.width;
+        this.height = newSize.height;
+        this._rect.size(this.width, this.height); // Update the size of the button
+    }
+    
+    get size(): { width: number, height: number } {
+        return { width: this.width, height: this.height }; // Return the current size
     }
 
     override update(): void {
@@ -76,30 +100,38 @@ class Button extends Widget{
         
         super.update();
     }
-    
-    pressReleaseState(): void{
 
+    pressReleaseState(): void{
         if (this.previousState instanceof PressedWidgetState)
             this.raise(new EventArgs(this));
     }
 
-    //TODO: implement the onClick event using a callback passed as a parameter
-    onClick(/*TODO: add callback parameter*/):void{}
-
     
+    //TODO: implement the onClick event using a callback passed as a parameter
+    onClick(callback: () => void):void{this._group.click(() => {
+        callback();
+    });
+}
+
+
     //TODO: give the states something to do! Use these methods to control the visual appearance of your
     //widget
     idleupState(): void {
-        throw new Error("Method not implemented.");
+        this._rect.fill("#FFB8BF");
+        // throw new Error("Method not implemented.");
     }
     idledownState(): void {
-        throw new Error("Method not implemented.");
+        this._rect.fill("#FB928E");
+        // throw new Error("Method not implemented.");
     }
     pressedState(): void {
-        throw new Error("Method not implemented.");
+        this._rect.fill("#FFB8BF");
+
+        // throw new Error("Method not implemented.");
     }
     hoverState(): void {
-        throw new Error("Method not implemented.");
+        this._rect.fill("#FB9AAC");
+        // throw new Error("Method not implemented.");
     }
     hoverPressedState(): void {
         throw new Error("Method not implemented.");

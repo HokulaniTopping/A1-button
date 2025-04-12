@@ -15,3 +15,11 @@ let btn = new Button(w);
 btn.tabindex = 2;
 btn.fontSize = 14
 btn.move(12, 50)
+
+const heading = new Heading(w); 
+heading.text = "Original Heading Text";
+
+btn.onClick(() => {
+    heading.text = "Button Clicked!";
+    heading.update();
+});
