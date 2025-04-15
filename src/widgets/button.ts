@@ -121,8 +121,8 @@ class Button extends Widget{
         // throw new Error("Method not implemented.");
     }
     idledownState(): void {
-        this._rect.fill("#FB928E");
-        // throw new Error("Method not implemented.");
+        // this._rect.fill("#FB928E");
+        throw new Error("Method not implemented.");
     }
     pressedState(): void {
         this._rect.fill("#FFB8BF");

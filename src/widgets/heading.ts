@@ -10,7 +10,7 @@ class Heading extends Widget{
     private _fontSize: number;
     private _text_y: number;
     private _text_x: number;
-    private defaultText: string= "Heading";
+    // private defaultText: string= "Heading";
     private defaultFontSize: number = 18;
     private defaultWidth: number = 80;
     private defaultHeight: number = 30;
@@ -20,7 +20,7 @@ class Heading extends Widget{
         // set defaults
         this.height = this.defaultHeight;
         this.width = this.defaultWidth;
-        this._input = this.defaultText;
+        // this._input = this.defaultText;
         this._fontSize = this.defaultFontSize;
         /* aria */
         this.role = RoleType.heading;
