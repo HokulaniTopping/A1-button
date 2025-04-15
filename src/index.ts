@@ -19,8 +19,6 @@ lbl1.move(10,20);
 
 
 
-
-
 let btn = new Button(w);
 btn.tabindex = 2;
 btn.fontSize = 14
@@ -41,7 +39,7 @@ btn.onClick(() => {
 
 
 
-
+let clickNum = 0;
 
 const checkBox = new CheckBox(w);
 checkBox.text = "Accept Terms";
@@ -49,7 +47,14 @@ checkBox.move(10, 80);
 
 
 checkBox.onClick(() => {
-    checkBox.text = "Accepted Terms";
+    clickNum = clickNum + 1;
+    if (clickNum % 2 == 0){
+        checkBox.text = "Accept Terms";
+    }
+    else if (clickNum % 2 != 0) {
+        checkBox.text = "Accepted Terms";
+    }
+    
     console.log(checkBox.checked ? "Checkbox is checked" : "Checkbox is unchecked");
 });
 
