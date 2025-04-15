@@ -10,7 +10,6 @@ class Heading extends Widget{
     private _fontSize: number;
     private _text_y: number;
     private _text_x: number;
-    // private defaultText: string= "Heading";
     private defaultFontSize: number = 18;
     private defaultWidth: number = 80;
     private defaultHeight: number = 30;

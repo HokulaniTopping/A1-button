@@ -5,7 +5,8 @@ import { Window, Widget, RoleType, EventArgs } from "../core/ui";
 import { Rect, Text, Box } from "../core/ui";
 import { SVG } from '@svgdotjs/svg.js';  // If you're using svg.js module
 
-class CheckBox extends Widget {
+
+class radioButton extends Widget {
     private _rect: Rect;
     private _text: Text;
     private _input: string;
@@ -16,21 +17,26 @@ class CheckBox extends Widget {
     private defaultFontSize: number = 18;
     private defaultWidth: number = 20; // Checkbox width
     private defaultHeight: number = 20; // Checkbox height
-    private _checked: boolean = false; // Track if checkbox is checked
+    public _group: any; // Group of radio buttons
 
-    constructor(parent: Window) {
+
+    private _checked: boolean = false; // Track if checkbox is checked
+    private static radioButtons: radioButton[] = []; 
+
+    constructor(parent: Window, group: any) {
         super(parent);
         // set defaults
         this.height = this.defaultHeight;
         this.width = this.defaultWidth;
         this._input = this.defaultText;
         this._fontSize = this.defaultFontSize;
-        // set Aria role for checkbox
+        this._group = group; // The group the radio button belongs to
         this.role = RoleType.button; // Keep it as button for accessibility
         // render widget
         this.render();
         // prevent text selection
         this.selectable = false;
+        radioButton.radioButtons.push(this); // Add this radio button to the group
     }
 
     set fontSize(size: number) {
@@ -49,23 +55,13 @@ class CheckBox extends Widget {
     }
 
     render(): void {
-        const cornerRadius = 5;
+        const cornerRadius = 10;
 
         this._group = (this.parent as Window).window.group();
-        // Create a path for the checkbox (rounded rectangle)
-        this._rect = this._group.rect(this.width, this.height);
-        this._rect.stroke("pink");
-        this._rect.fill("pink"); // Initially white when unchecked
-
-        // Create checkmark that will be displayed when checkbox is checked
-        const checkmarkSize = this.height * 0.6;
-        const checkmarkX = (this.width - checkmarkSize) / 2;
-        const checkmarkY = (this.height - checkmarkSize) / 2;
-        const checkmarkPath = this._group.path()
-            .stroke("none")
-            .fill("transparent")
-            .opacity(0);
-
+        // Create a circular path for the radio button (instead of a rectangle)
+        this._rect = this._group.circle(this.width);
+        this._rect.stroke("black");
+        this._rect.fill("white"); // Initially white when unchecked
 
         this._text = this._group.text(this._input);
         this._text.font('size', this._fontSize);
@@ -112,9 +108,22 @@ class CheckBox extends Widget {
     }
 
     pressReleaseState(): void {
-        this._checked = !this._checked;
-        this.update();
-        this.raise(new EventArgs(this));
+        if (!this._checked) {
+            this.uncheckOtherButtons(); // Uncheck other buttons in the group
+            this._checked = true;
+            this.update();
+            this.raise(new EventArgs(this)); // Notify the change
+        }
+    }
+
+
+    uncheckOtherButtons(): void {
+        for(let button of radioButton.radioButtons) {
+            if (button !== this) {
+                button._checked = false;
+                button.update()
+            }
+        }
     }
 
     onClick(callback: () => void): void {
@@ -159,4 +168,4 @@ class CheckBox extends Widget {
     }
 }
 
-export { CheckBox }
+export { radioButton }
