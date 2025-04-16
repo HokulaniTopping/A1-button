@@ -37,7 +37,7 @@ class ScrollBar extends Widget {
         this._trackHeight = 200; // Default track height
         this._thumbHeight = 20; // Default thumb height
         this._thumbPosition = 100; // Default thumb position
-        this._trackY = 500; // Y position of the track
+        this._trackY = 450; // Y position of the track
         this._onThumbMove = () => {}; // Event handler for thumb move
         this.role = RoleType.scrollbar; // Set the role as scrollbar for accessibility
         this._positionForViewer = 0;

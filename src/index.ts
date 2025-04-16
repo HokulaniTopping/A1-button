@@ -5,6 +5,9 @@ import { CheckBox } from './widgets/checkbox';
 import { radioButton } from "./widgets/radiobutton";
 import { ScrollBar } from "./widgets/scrollbar";
 import { ProgressBar } from "./widgets/progressbar";
+import { ColorPaletteSelector } from "./widgets/colorpalleteselector";
+
+
 
 let w = new Window(window.innerHeight-10,'100%');
 
@@ -113,6 +116,8 @@ radiobutton3.fontSize = 14;
 
 
 
+
+
 //MAKE THE LABEL WORK
 let positionForViewer = 0;
 
@@ -122,7 +127,7 @@ scrollBar.scrollBarHeight = 300;
 const positionLabel = new Heading(w);
 
 // positionLabel.text = `Thumb position: ${positionForViewer}`;
-positionLabel.move(50, 600);
+positionLabel.move(50, 50);
 
 scrollBar.onThumbMove((event) => {
     positionForViewer = positionForViewer + 1;
@@ -131,7 +136,7 @@ scrollBar.onThumbMove((event) => {
 });
 
 // Move the scroll bar to position (50, 500)
-scrollBar.move(10, 500);
+scrollBar.move(10, 450);
 
 
 
@@ -175,3 +180,32 @@ progressBar.increment(30);  // Increment to 30%
 
 // Example of setting a specific increment value
 progressBar.increment(50);  // Increment to 50%
+
+
+
+
+
+
+
+
+
+let colorPalette1 = new ColorPaletteSelector(w);
+colorPalette1.render();
+colorPalette1.move(400, 50); // Position the color palette
+
+// Create the text widget to show selected color
+const colorText = new Heading(w);
+colorText.text = `The color selected is: ${colorPalette1._selectedColor}`;
+colorText.move(40, 50); // Position the text
+
+// Explicitly call update() to ensure text is rendered properly
+colorText.update();
+
+// Register an event to update colorText whenever a color is selected
+colorPalette1.addEventListener("colorSelect", (event) => {
+    // Update the text to reflect the selected color
+    colorText.text = `The color selected is: ${colorPalette1._selectedColor}`;
+
+    // Ensure that the text is updated visually on the screen
+    colorText.update();  
+});
