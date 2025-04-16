@@ -114,15 +114,13 @@ class Button extends Widget{
 }
 
 
-    //TODO: give the states something to do! Use these methods to control the visual appearance of your
     //widget
     idleupState(): void {
         this._rect.fill("#FFB8BF");
         // throw new Error("Method not implemented.");
     }
     idledownState(): void {
-        // this._rect.fill("#FB928E");
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
     pressedState(): void {
         this._rect.fill("#FFB8BF");
@@ -134,16 +132,16 @@ class Button extends Widget{
         // throw new Error("Method not implemented.");
     }
     hoverPressedState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
     pressedoutState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
     moveState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
     keyupState(keyEvent?: KeyboardEvent): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 }
 

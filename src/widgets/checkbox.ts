@@ -129,12 +129,12 @@ class CheckBox extends Widget {
     }
 
     idledownState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
 
     }
 
     pressedState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
 
     }
 
@@ -143,19 +143,19 @@ class CheckBox extends Widget {
     }
 
     hoverPressedState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 
     pressedoutState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 
     moveState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 
     keyupState(keyEvent?: KeyboardEvent): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 }
 

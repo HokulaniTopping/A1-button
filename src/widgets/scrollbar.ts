@@ -123,6 +123,8 @@ class ScrollBar extends Widget {
         // Set the thumb's position based on the track's top position and the thumb's calculated position
         this._thumbPosition = position;
         this._thumb.move(10, this._trackY + this._thumbPosition);  // Move the thumb within the track's bounds
+        console.log("Thumb moved");
+
     
         // Optionally, notify consuming code about the thumb movement
         this.raise(new EventArgs(this));
@@ -131,12 +133,14 @@ class ScrollBar extends Widget {
 
     onThumbMove(callback: (event: EventArgs) => void): void {
         this._onThumbMove = callback;
+
     }
 
     override update(): void {
         this._thumb.size(20, this._thumbHeight);
         this._thumb.move(10, this._trackY + this.thumbPosition);
         super.update();
+
     }
 
     idleupState(): void {
@@ -144,16 +148,16 @@ class ScrollBar extends Widget {
     }
 
     idledownState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
 
     }
     
     pressReleaseState(): void{
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 
     pressedState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
 
     }
 
@@ -162,19 +166,19 @@ class ScrollBar extends Widget {
     }
 
     hoverPressedState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 
     pressedoutState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 
     moveState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 
     keyupState(keyEvent?: KeyboardEvent): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 }
 
@@ -210,130 +214,3 @@ export { ScrollBar }
 
 
 
-
-
-// import { Widget, Window, EventArgs, RoleType } from "../core/ui";
-// import { Rect, Text, Box } from "../core/ui";
-// import { SVG } from '@svgdotjs/svg.js'; // If you're using svg.js module
-
-// class ScrollBar extends Widget {
-//     private _track: Rect;
-//     private _thumb: Rect;
-//     private _upButton: Rect;
-//     private _downButton: Rect;
-//     private _trackHeight: number;
-//     public _thumbHeight: number;
-//     private _thumbPosition: number;
-//     private _trackY: number;
-//     private _onThumbMove: (event: EventArgs) => void;
-
-//     constructor(parent: Window) {
-//         super(parent);
-//         this._trackHeight = 200;  // Default track height
-//         this._thumbHeight = 20;   // Default thumb height
-//         this._thumbPosition = 0;  // Initial thumb position
-//         this._trackY = 50;       // Y position of the track
-//         this._onThumbMove = () => {}; // Event handler for thumb move
-//         this.role = RoleType.scrollbar; // Set the role as scrollbar for accessibility
-
-//         this.render();
-//     }
-
-//     // Create and render the scrollbar UI
-//     render(): void {
-//         this._group = (this.parent as Window).window.group();
-
-//         // Create the scroll track
-//         this._track = this._group.rect(20, this._trackHeight).fill("#FFE9EC");
-//         this._track.stroke("black");
-//         this._track.move(0, this._trackY);
-
-//         // Create the scroll thumb
-//         this._thumb = this._group.rect(20, this._thumbHeight).fill("pink");
-//         this._thumb.move(0, this._trackY + this._thumbPosition);  // Position the thumb correctly
-
-//         // Create up and down buttons
-//         this._upButton = this._group.rect(20, 20).fill("pink").move(0, this._trackY - 20);
-//         this._downButton = this._group.rect(20, 20).fill("pink").move(0, this._trackY + this._trackHeight);
-
-//         // Register events for up, down, and track clicks
-//         this.registerEvents();
-//         this.outerSvg = this._group;
-//     }
-
-//     private registerEvents(): void {
-//         // Button click event to move the thumb up or down
-//         this._upButton.mouseup(() => this.moveThumb(-10));  // Move thumb up
-//         this._downButton.mouseup(() => this.moveThumb(10)); // Move thumb down
-//     }
-
-//     private moveThumb(offset: number): void {
-//         // Move the thumb up or down by the given offset
-//         let newPosition = this._thumbPosition + offset;
-
-//         // Keep the thumb within the track bounds
-//         if (newPosition < 0) newPosition = 0;
-//         if (newPosition > this._trackHeight - this._thumbHeight) newPosition = this._trackHeight - this._thumbHeight;
-
-//         // Update thumb position and fire the onThumbMove event
-//         this.moveThumbTo(newPosition);
-//     }
-
-//     private moveThumbTo(position: number): void {
-//         // Set the thumb's position based on the track's top position and the thumb's calculated position
-//         this._thumbPosition = position;
-//         this._thumb.move(0, this._trackY + this._thumbPosition);  // Move the thumb within the track
-
-//         // Trigger the onThumbMove event to notify consuming code
-//         this.raise(new EventArgs(this));  // This triggers the onThumbMove event
-//     }
-
-//     onThumbMove(callback: (event: EventArgs) => void): void {
-//         this._onThumbMove = callback;
-//     }
-
-//     override update(): void {
-//         this._thumb.size(20, this._thumbHeight);
-//         this._thumb.move(0, this._trackY + this._thumbPosition); // Ensure the thumb stays inside the track
-//         super.update();
-//     }
-
-
-//     pressReleaseState(): void {
-//         // Not needed in this example
-//     }
-
-//     idledownState(): void {
-//         // Not needed in this example
-//     }
-
-//     pressedState(): void {
-//         // Not needed in this example
-//     }
-
-//     hoverState(): void {
-//         this._thumb.fill("pink");
-//     }
-
-//     idleupState(): void {
-//         this._thumb.fill("pink");
-//     }
-
-//     hoverPressedState(): void {
-//         // Not needed in this example
-//     }
-
-//     pressedoutState(): void {
-//         // Not needed in this example
-//     }
-
-//     moveState(): void {
-//         // Not needed in this example
-//     }
-
-//     keyupState(keyEvent?: KeyboardEvent): void {
-//         // Not needed in this example
-//     }
-// }
-
-// export { ScrollBar }

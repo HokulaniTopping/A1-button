@@ -135,7 +135,7 @@ scrollBar.onThumbMove((event) => {
     positionLabel.update();
 });
 
-// Move the scroll bar to position (50, 500)
+
 scrollBar.move(10, 450);
 
 

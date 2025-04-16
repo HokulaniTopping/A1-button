@@ -13,7 +13,7 @@ class ColorPaletteSelector extends Widget {
 
     constructor(parent: Window) {
         super(parent);
-        this._colors = ["#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#A133FF", "#33FFF4"];
+        this._colors = ["#C9A9A6", "#FF00FF", "#FF69B4", "#FF33A1", "#FFB6C1", "#F3CFC6"];
         this._colorBlocks = [];
         this._selectedColor = this._colors[0];
         // this.render();
@@ -79,39 +79,42 @@ class ColorPaletteSelector extends Widget {
     pressReleaseState(): void {
         console.log("Press Release State Triggered");
     }
-    //TODO: give the states something to do! Use these methods to control the visual appearance of your
+    
+
+
+
     //widget
     idleupState(): void {
-        // this._rect.fill("#FFB8BF");
         // throw new Error("Method not implemented.");
     }
 
     idledownState(): void {
-        // this._rect.fill("#FB928E");
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
     pressedState(): void {
-        // this._rect.fill("#FFB8BF");
 
         // throw new Error("Method not implemented.");
     }
     hoverState(): void {
-        // this._rect.fill("#FB9AAC");
         // throw new Error("Method not implemented.");
     }
     hoverPressedState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
     pressedoutState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
     moveState(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
     keyupState(keyEvent?: KeyboardEvent): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 
 }
+
+
+
+
 
 export { ColorPaletteSelector }
