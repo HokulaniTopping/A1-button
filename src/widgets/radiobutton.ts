@@ -1,9 +1,7 @@
-// importing local code, code we have written
 import { IdleUpWidgetState, PressedWidgetState } from "../core/ui";
 import { Window, Widget, RoleType, EventArgs } from "../core/ui";
-// importing code from SVG.js library
 import { Rect, Text, Box } from "../core/ui";
-import { SVG } from '@svgdotjs/svg.js';  // If you're using svg.js module
+import { SVG } from '@svgdotjs/svg.js'; 
 
 
 class radioButton extends Widget {
@@ -15,28 +13,25 @@ class radioButton extends Widget {
     private _text_x: number;
     private defaultText: string = "Checkbox";
     private defaultFontSize: number = 18;
-    private defaultWidth: number = 20; // Checkbox width
-    private defaultHeight: number = 20; // Checkbox height
-    public _group: any; // Group of radio buttons
+    private defaultWidth: number = 20;
+    private defaultHeight: number = 20;
+    public _group: any;
 
 
-    private _checked: boolean = false; // Track if checkbox is checked
+    private _checked: boolean = false;
     private static radioButtons: radioButton[] = []; 
 
     constructor(parent: Window, group: any) {
         super(parent);
-        // set defaults
         this.height = this.defaultHeight;
         this.width = this.defaultWidth;
         this._input = this.defaultText;
         this._fontSize = this.defaultFontSize;
-        this._group = group; // The group the radio button belongs to
-        this.role = RoleType.button; // Keep it as button for accessibility
-        // render widget
+        this._group = group;
+        this.role = RoleType.button;
         this.render();
-        // prevent text selection
         this.selectable = false;
-        radioButton.radioButtons.push(this); // Add this radio button to the group
+        radioButton.radioButtons.push(this);
     }
 
     set fontSize(size: number) {
@@ -58,10 +53,9 @@ class radioButton extends Widget {
         const cornerRadius = 10;
 
         this._group = (this.parent as Window).window.group();
-        // Create a circular path for the radio button (instead of a rectangle)
         this._rect = this._group.circle(this.width);
         this._rect.stroke("black");
-        this._rect.fill("white"); // Initially white when unchecked
+        this._rect.fill("white");
 
         this._text = this._group.text(this._input);
         this._text.font('size', this._fontSize);
@@ -109,10 +103,10 @@ class radioButton extends Widget {
 
     pressReleaseState(): void {
         if (!this._checked) {
-            this.uncheckOtherButtons(); // Uncheck other buttons in the group
+            this.uncheckOtherButtons();
             this._checked = true;
             this.update();
-            this.raise(new EventArgs(this)); // Notify the change
+            this.raise(new EventArgs(this));
         }
     }
 

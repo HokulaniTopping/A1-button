@@ -3,6 +3,8 @@ import {Button} from "./widgets/button"
 import {Heading} from "./widgets/heading"
 import { CheckBox } from './widgets/checkbox'; 
 import { radioButton } from "./widgets/radiobutton";
+import { ScrollBar } from "./widgets/scrollbar";
+import { ProgressBar } from "./widgets/progressbar";
 
 let w = new Window(window.innerHeight-10,'100%');
 
@@ -104,3 +106,72 @@ radiobutton3.onClick(() => {
 
 radiobutton3.size = { width: 20, height: 20 };
 radiobutton3.fontSize = 14;
+
+
+
+
+
+
+
+//MAKE THE LABEL WORK
+let positionForViewer = 0;
+
+let scrollBar = new ScrollBar(w);
+scrollBar.scrollBarHeight = 300;
+
+const positionLabel = new Heading(w);
+
+// positionLabel.text = `Thumb position: ${positionForViewer}`;
+positionLabel.move(50, 600);
+
+scrollBar.onThumbMove((event) => {
+    positionForViewer = positionForViewer + 1;
+    positionLabel.text = `Thumb position: ${positionForViewer}`;
+    positionLabel.update();
+});
+
+// Move the scroll bar to position (50, 500)
+scrollBar.move(10, 500);
+
+
+
+
+
+
+
+
+
+
+
+
+// Create a progress bar instance
+let progressBar = new ProgressBar(w);
+progressBar.move(10, 300)
+// Set the width and increment value
+progressBar.progressBarWidth = 300;
+progressBar.incrementValue = 20;
+
+
+// Create a Heading or Text widget to display progress information
+const progressText = new Heading(w);
+
+progressText.move(50, 350); // Position it below the progress bar
+progressText.text = `Progress bar at ${progressBar.progressBarWidth}`;
+
+
+
+// Register the event handler for increment
+progressBar.onIncrement((event) => {
+    console.log(`Progress bar incremented to: ${progressBar._progressValue}`);
+});
+
+// Register the event handler for state change
+progressBar.onStateChange((event) => {
+    console.log(`State changed for progress bar`);
+});
+
+// Simulate incrementing the progress bar
+progressBar.increment(30);  // Increment to 30%
+
+// Example of setting a specific increment value
+progressBar.increment(50);  // Increment to 50%
